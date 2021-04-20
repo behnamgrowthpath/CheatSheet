@@ -1,0 +1,25 @@
+docker-compose up -d
+docker ps -a
+docker logs volumeName
+
+docker volume create volumeName
+docker network create networkName
+
+Docker stop volumeName
+
+docker volume rm VolumeName
+docker network rm network_id
+
+docker container ls -a
+docker container ls -aq
+
+docker container stop container_id
+docker container stop $(docker container ls –aq)
+
+docker container rm container_id
+docker container rm $(docker container ls –aq)
+
+docker image ls
+docker image rm image_id1 image_id2
+
+docker system prune
