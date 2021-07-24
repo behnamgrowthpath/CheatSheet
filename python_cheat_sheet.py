@@ -8,24 +8,24 @@
 name = input("what is your name?")  # save as string ( " or ' )    usage of backslash --> print('Brian\'s mother: He\'s not an angel. He\'s a very naughty boy!')
 print('hi ' + name)                  # \n : new line   \t : tab  \  : space
 print('%' * 4)
+print(""" 
+multi
+line
+text
+""")
+"""
+docstrings
+"""
+# Unlike conventional comments, docstrings are retained throughout the runtime of the program. This allows the programmer to inspect these comments at run time
 
 # string formatting --> also it has many other functions to do more stuff
-
-course = ' python for beginners' 
-# We can slice a string using a similar notation:
-course[1:11]
-
+# Strings can be thought of as a sequence of characters as lists. Each character in the string has its unique position (or index). 
 adadha = [4, 6, 7]
 massage = "Numbers: {0} {1} {2}".format(adadha[0], adadha[1], adadha[2])  # Each argument of the format function is placed in the string at the corresponding position, which is determined using the curly braces { }.
-print(massage)
+
 a = "{x}, {y}".format(x=5, y=12)
-print(a)
 b = f'also numbers: {adadha[0]} , {adadha[1]} & {adadha[2]}'
-print(b)
-# Conditional expressions are also known as applications of the ternary operator.
-a = 7
-b = 1 if a >= 5 else 42
-print(b)
+
 
 print("$ ".join(["spam", "eggs", "ham"]))
 # prints "spam$ eggs$ ham"
@@ -42,13 +42,16 @@ print("AN ALL CAPS SENTENCE".lower())
 print("spam, eggs, ham".split(", "))
 # prints "['spam', 'eggs', 'ham']"
 course.find('p') # returns the index of the first occurrence of p (or -1 if not found)
-# 20 // 6 = 3 --> int
+
+# 20 // 6 = 3 --> int (floor)
 # 2 ** 4 = 16 
+# 8 ** (1/2) = 2.0 --> float
 # 12 / 6 = 2.0 --> float
 # 7 % 2 = 1
 # In-place operators ( += ) can be used for any numerical operation (+, -, *, /, %, **, //).
 
 # Numberic functions:
+b = 1 if a >= 5 else 42
 print(max([1, 4, 9, 2, 5, 6, 8]))
 print(min(1, 2, 3, 4, 0, 2, 1))
 print(sum([1, 2, 3, 4, 5]))
@@ -72,8 +75,6 @@ elif (1 == 2):
     x = 3
 else:
     x = 4 
-print(x)
-
 # we use "and", "or" & "not" within the booleans.
 
 # [lists] :  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -84,8 +85,9 @@ print(things[1])
 print(things[2])
 print(things[2][2])
 
-str = "Hello world!"
-print(str[6])
+course = ' python for beginners' # all of strings are a list
+# We can slice a string using a similar notation:
+course[1:11]
 
 nums = [1, 2, 3]
 print(nums + [4, 5, 6])
@@ -103,13 +105,24 @@ print(2 not in nums)
 nums.append(4)  # clear / copy / count / extend / index / insert / pop / remove / reverse / sort
 nums.append(6) # adds 6 to the end
 nums.insert(0, 6) # adds 6 at index position of 0
+# inserts a new item at any position in the list
+nums.index(X)# finds the first X of a list item and returns its index.
+max(nums)# Returns the maximum value.
+min(nums)# Returns the minimum value.
+nums.count(item)# Returns a count of how many times an item occurs in a list.
+nums.remove(item)# Removes an item from a list.
+nums.reverse()# Reverses items in a list. 
+nums.sort()
 print(len(nums))  # max / min
 
 square = [1, 2, 3, 4, 5, 6, 7]
 print(square[3:5:1])  # like Range the second index doesn't appear. # slicing # we can use negative value in second index to count from the end. also we can use negative value in third index to go backward.
+print(square[5:-3:-2])
 
-evens = [i**2 for i in range(10) if i % 2 == 0]
+evens = [i**2 for i in range(10) if i % 2 == 0] # --> list comprehension
 print(evens)
+
+numbericList = list(range(2)) # no need to list() on for statment
 
 nums = [55, 44, 33, 22, 11]
 if all([i > 5 for i in nums]):
@@ -126,27 +139,32 @@ print(dict_nums)
 
 # We can use strings or numbers to define keys. They should be unique. We can use any types for the values.
 squares = {1: 1, 2: True , 3: "error", 4: 16.5}
-squares[8] = 64
+# keys should be immutable. such as any data types but not the variables
 squares[3] = 9
-
-print(squares)
 
 
 ages = {"Dave": 24, "Mary": 42, "John": 58}  # a dictionary can store any types of data as values.
 print(ages["Dave"])
 
 # in / not in --> booleans
+boOl_t = not 4 in squares # check if a key is peresent or not
+bool_T = "love" in 'I love you'
 
 pairs = {1: "apple", "orange": [2, 3, 4], None: "True"}
 print(pairs.get("orange"))
 print(pairs.get(7))
 print(pairs.get(12345, "not in dictionary")) # get function just returns values.
+numOfKeyValues = len(pairs)
 
 # (Tuples) : ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 tp = ("1", "2", 3, 4, [1, 2, 3], (5, 6))  # tuples are faster than the lists ,but they can not be changed. They are like read-only lists.
+#  Tuples can be created without the parentheses by just separating the values with commas. 
+tp2 = 1, (1, 2, 3)
 print(tp[1::3])  # slicing # we can use negative value in second index to count from the end. also we can use negative value in third index to go backward.
 print(tp[:3:1])
+
+'''tuple inpacking:'''
 numbers = (1, 2, 3, 4)
 a, *b, c = numbers
 # A variable that is prefaced with an asterisk (*) takes all values from the iterable that are left over from the other variables.
@@ -158,7 +176,7 @@ num_list = list(num_set)
 print(num_list)
 word_set = set(["spam", "eggs", "sausage"])
 print( word_set )
-num_set.add(44)  # also such other functions.
+num_set.add(44)  # also such other functions. --> remove()
 # They share some functionality with lists, such as the use of in to check whether they contain a particular item.
 # Basic uses of sets include membership testing and the elimination of duplicate entries.
 # They can't be indexed. 
@@ -244,7 +262,7 @@ print(operation(a, b))
 
 # The None object is returned by any function that doesn't return anything else.
 
-# Pure functions are same as function in mathematic because they return same values for same arguments.
+# Pure functions are same as function in mathematic because they return same values for same arguments and more important has no side effect.
 
 """
 Creating a function normally (using def) assigns it to a variable automatically. 
@@ -267,9 +285,9 @@ print((lambda x: x**2 + 5*x + 4)(-4)) # --> very useful
 # The function MAP takes a function and an iterable as arguments, and returns a new iterable with the function applied to each argument. 
 # The function FILTER filters an iterable by removing items that don't match a predicate (a function that returns a Boolean). 
 nums = [11, 22, 33, 44, 55]
-result = list(map(lambda x: x + 5, nums))
+result = list(map(lambda x: x + 5, nums))      # changing the arg
 print(result)
-res = list(filter(lambda x: x % 2 == 0, nums))
+res = list(filter(lambda x: x % 2 == 0, nums)) # checking the arg
 print(res)  
 
 
@@ -278,14 +296,13 @@ def polynomial(x):
 
 print(polynomial(-4))
 
-# Using *args as a function parameter enables you to pass an arbitrary number of arguments to that function. The arguments are then accessible as the tuple args in the body of the function. 
+# Using *args as a function parameter enables you to pass an arbitrary number of arguments to that function. The arguments are then accessible as the TUPLE args in the body of the function. 
 # .  **kwargs (standing for keyword arguments) allows you to handle named arguments that you have not defined in advance. The keyword arguments return a dictionary in which the keys are the argument names, and the values are the argument values.
 # Named parameters to a function can be made optional by giving them a default value. These must come after named parameters without a default value.
 
 def my_func(x, y=7, *args, **kwargs):
     print(kwargs, args, x, y)
-
-my_func(2, 3, 4, 5, 6, a=7, b=8)
+my_func(2, 3, 4, 5, 6, a=7, b=8) # --> {'a': 7, 'b': 8} (4, 5, 6) 2 3
 
 
 """
@@ -310,30 +327,54 @@ def countdown():
     while i > 0:
         yield i
         i -= 1
-
-
 for i in countdown():
     print(i)
+
+#yield, hamoon reutrn hast vali function edame peyda mikone.
+
+def PrimeGenerator():
+  i = 2 
+  while true:
+    yield is_prime(i)
+    i += 1
+# hala function "is_prime(x)" daghighan mesl e " x in PrimeGenerator" amal mikone.
+
 # Finite generators can be converted into lists by passing them as arguments to the list function.
 # In fact, they can be infinite!
 
+
+
 # Decoratos are functions that modify other functions.
-
-
 def decor(func):
     def wrap():
         print("============")
         func()
         print("============")
     wrap()
-
 def print_text():
     print("Hello world!")
-
-
 def decorated(): decor(print_text)
 decorated()
+
 # We can also use @ symbol to decorate s.th but its confusing.
+
+#decorating usege:
+def MainFunc1(func, arg):
+  i = arg + 5
+  return func(i)
+def MainFunc1(func, arg):
+  i = arg + 10
+  return func(i)
+def SubFunc1(x):
+  print(x%2)
+def SubFunc2(y):
+  print(x%3)
+#...
+decorated1 = MainFunc1(SubFunc2, example)
+decorated2 = MainFunc2(SubFunc1, example)
+decorated3 = MainFunc2(SubFunc2, example)
+decorated4 = MainFunc1(SubFunc1, example)
+# now we can call decorated functions like "decoratedX()"
 
 # Recursion is the fundamental part of recursion is self-reference - functions calling themselves.
 
@@ -391,15 +432,15 @@ except (ValueError, TypeError) as e:
     print(e)
 except:    # won't happen if other exceptions happen
     print("An error occurred")
+else:      # will happen if no exception occures
+    print("no error happend")
 finally:   # always happen
     print("This code will run no matter what")
 
-# try/finally even have other usages in somewhereelse.
 # we can use raise statment to show exception without any apearance.
-"""
-The else statement can also be used with try/except statements. 
-In this case, the code within it is only executed if no error occurs in the try statement.
-"""
+name = "123"
+raise ValueError("invalid name!!")
+
 
 """
 # An assertion is a sanity-check that you can turn on or turn off when you have finished testing the program.
@@ -413,26 +454,28 @@ print(3)                          # does not happen
 """
 
 # Opening & Working with Files :  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-"""
-file = open("filename.txt", "r+") # "w" "r" "a" "-b"
-print(file.read(16)) # bytes of file
-print(file.read(4))
+
+file = open("path/filename.txt", "r") # "w":write,  "r":read, "a":append, "b":binary __> this modes can be combined like "wb" or "rw"
+# The argument of the open function is the path to the file. If the file is in the current working directory of the program, you can specify only its name.
+print(file.read()) 
+print(file.read(4))# bytes of file, each ASCII character is 1 byte
 cont = file.read()
 # After all contents in a file have been read, any attempts to read further from that file will return an empty string, because you are trying to read from the end of the file.
-for line in file:
-        print(line)
-# also we can use print(file.readlines())
+for line in file.readlines(): # --> returns a list that every index is a line.
+    print(line)
 file.write("This has been written to a file") 
 # The "w" mode will create a file, if it does not already exist. 
 # When a file is opened in write mode, the file's existing content is deleted.
-# The write method returns the number of bytes written to a file, if successful.  -->  file.write(msg) == len(msg)
+# If you want to add content to an existing file, you can open it using the "a" mode.
+# The write method also returns the number of bytes written to a file, if successfully wrote in file.  -->  file.write(msg) = len(msg)
 # do stuff to the file
 file.close()
 
-# The file is automatically closed at the end of the with statement, even if exceptions occur within it.
+# The file is automatically closed at the end of the with statement, even if exceptions occur within it. Or we can use try/finally
 with open("filename.txt") as f:
   print(f.read())
 
+"""
 # Text analyzer :
 def count_char(text, char):
   count = 0
@@ -447,6 +490,8 @@ for char in "abcdefghijklmnopqrstuvwxyz":
   perc = 100 * count_char(text, char) / len(text)
   print("{0} -> {1}%".format(char, round(perc, 2)))
 """
+
+
 # Classes and inheritance: ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 """
 The __init__ method is the most important method in a class. 
@@ -463,19 +508,33 @@ One common use of them is operator overloading. This means we can define custom 
 """
 class animal :
   legs = 2 
-  def __init__(self, color, generation):
+  def __init__(self, color, generation): # this arguments called attributes # this method is called just before an object is instantiated
       self.color = color
       self.generation = generation
 class dog(animal) :
   legs = 4   
-  def voice(self):
+  def voice(self): # self should be in every methods of class as functions
     print("wooof!")
     print(super().legs) # The function super is a useful inheritance-related function that refers to the parent class. It can be used to find the method with a certain name in an object's superclass.
 billy = dog("","")
 patrick = dog("gray","1th")
 print(patrick.color)
-patrick.voice()
+patrick.voice()    # it could be overrride
 
+class Rectangle:
+    def __init__(self, length, width):
+        self.length = length
+        self.width = width
+    def area(self):
+        return self.length * self.width
+    def perimeter(self):
+        return 2 * self.length + 2 * self.width
+class Square(Rectangle):
+    def __init__(self, length):
+        super().__init__(length, length)
+
+
+# methods with __ in end and beginnig of them called magic method and the most usage of them is overriding
 class math2D :
   def __init__(self, x,y,string):
     self.x = x
@@ -490,7 +549,7 @@ class math2D :
     line = "$" * len(other.string)
     return "\n".join([self.string,line,other.string])
 
-
+# dar kul in magic method komak mikone agar amaliati vujood dasht va ma khastim ye taghir e koochik ijad konim toosh, betoonim override konim.
 
 A = math2D(3,4,"Robert")
 B = math2D(5,6,"Kiosuki")
@@ -501,26 +560,34 @@ print(A / B)
 # __del__ is for managing the memory and garbage collection.
 
 
+
+
 class forshow :
-  qwerty = 1      # --> public
-  _qwerty = 2     # --> encapsulation: s.th with low chance of usong out of the class
-  __qwerty = 3    # --> private: it could be used as public with _ClassName__PrivateObject
+  
+  # Methods of objects we've looked at so far are called by an instance of a class, which is then passed to the self parameter of the method.
+  # Class methods are different -- they are called by a class, which is passed to the cls parameter of the method. 
+  def __init__(self, x, qwerty, qwert, qwer):       # --> object method
+    self.x = x
+    self.qwerty = qwerty    # --> public
+    self._qwert = qwert     # --> mark as private: it has called private but still can be used by external code as always.
+    self.__qwer = qwer      # --> private: it could be used as public with a little different name for call like "variableName._ClassName__PrivateMethod"
+  
   @classmethod
-  def NotSelfUse(cls,parameter):        # --> class method
+  def NotSelfUse(cls, parameters):        # --> class method
     return None
   @staticmethod
-  def NoAdditionalArgument(parameter0): # --> static method are identical to normal functions that belong to a class.
+  def NoAdditionalArgument(parameter0): # --> static method are identical to normal functions that belong to a class without cls or self.
     return None
   @property 
-  def ReadOnlyAttribute(self):
-    return True
+  def ReadOnlyAttribute(self):  # --> in vaghti property seda zade beshe, ejra mishe.
+    return self.ReadOnlyAttribute
   """
   Properties can also be set by defining setter / getter functions.
   The setter function sets the crosspending property's value.
   The getter gets the value.
   """
   @ReadOnlyAttribute.setter
-  def ReadOnlyAttribute(self, value):
+  def ReadOnlyAttribute(self, value): # --> in vaghti meghdar property ra taghir bedim ejra mishe.
     forshow.ReadOnlyAttribute.value = bool(input("True/False"))
     return value
   
