@@ -8,11 +8,18 @@
 name = input("what is your name?")  # save as string ( " or ' )    usage of backslash --> print('Brian\'s mother: He\'s not an angel. He\'s a very naughty boy!')
 print('hi ' + name)                  # \n : new line   \t : tab  \  : space
 print('%' * 4)
+'''USAGE OF %d IN PRINT
+print("Max leaf nodes: %d  \t\t Mean Absolute Error:  %d" %(max_leaf_nodes, my_mae))
+Max leaf nodes: 5  		 Mean Absolute Error:  347380
+Max leaf nodes: 50  		 Mean Absolute Error:  258171
+Max leaf nodes: 500  		 Mean Absolute Error:  243495
+Max leaf nodes: 5000  		 Mean Absolute Error:  254983'''
 print(""" 
 multi
 line
 text
 """)
+
 """
 docstrings
 """
@@ -25,7 +32,7 @@ massage = "Numbers: {0} {1} {2}".format(adadha[0], adadha[1], adadha[2])  # Each
 
 a = "{x}, {y}".format(x=5, y=12)
 b = f'also numbers: {adadha[0]} , {adadha[1]} & {adadha[2]}'
-
+#* .len() will work with puncctuations and spaces both!
 
 print("$ ".join(["spam", "eggs", "ham"]))
 # prints "spam$ eggs$ ham"
@@ -66,6 +73,8 @@ if is_published is None:  # --> None == null
 print(type(price))  # = integer
 price = float(price)             # float() / str() / int() / bool()
 print(type(price))  # = float
+
+# floor() / ceil() / round(x, 2) --> for converting float to int
 
 print("Annie" > "Andy")  # shows true
 
@@ -206,7 +215,103 @@ When to use the other types:
 lists:  SIMPLE, CHANGEABLE, MUTABLE, ORDERED.
 sets: UNIQUENESS, UNORDERED, IMMUTABLE, NOT CHANGEABLE,
 tuples: IMMUTABLE, NOT CHANGEABLE, ORDERED
+
+most useful thing is combination of dictionary and tuples
 """
+
+# user-defined data strurctures: ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+# 4 types like: linked lists, queues, stacks and graphs
+
+  # stack : Every time an element is added, it goes on the "top" of the stack. Only an element at the top of the stack can be removed, just like a stack of plates. This behavior is called LIFO (Last In, First Out).
+class Stack:
+  def __init__(self):
+    self.items = []  
+  def is_empty(self):
+    return self.items == []
+  def push(self, item):
+    self.items.insert(0, item) #add
+  def pop(self):
+    return self.items.pop(0) #remove
+  def print_stack(self):
+    print(self.items)
+
+  # queue : The elements are inserted from one end, called the rear, and deleted from the other end, called the front. This behavior is called FIFO (First in First Out). 
+class Queue:
+  self.items = []
+  def is_empty(self):
+    return self.items == []
+  def enqueue(self, item):
+    self.items.insert(0, item)
+  def dequeue(self):
+    return self.items.pop()
+  def print_queue(self):
+    print(self.items)
+
+  # linked list : sequence of nodes where each node stores its own data and a link to the next node. The first node is called the head, and it's used as the starting point for any iteration through the list. The last node must have its link pointing to None to determine the end of the list. 
+class Node:
+  def __init__(self, data, next):
+    self.data = data
+    self.next = next
+
+class LinkedList:
+  def __init__(self):
+    self.head = None
+
+  def add_at_front(self, data):
+    self.head = Node(data, self.head)
+
+  def add_at_end(self, data):
+    if not self.head:
+        self.head = Node(data, None)
+        return
+    curr = self.head
+    while curr.next:
+        curr = curr.next
+    curr.next = Node(data, None)
+
+  def get_last_node(self):
+    n = self.head
+    while(n.next != None):
+        n = n.next
+    return n.data
+  def is_empty(self):
+    return self.head == None
+
+  def print_list(self):
+    n = self.head
+    while n != None:
+        print(n.data, end = " => ")
+        n = n.next
+    print()
+
+  # graph : set of connected nodes where each node is called a Vertex and the connection between two of them is called an Edge. 
+# A graph can be represented using a square matrix, where each element represents the edges: 0 indicates no edge, while 1 indicates an edge. The rows and columns represent the vertices. 
+
+class Graph(): 
+  def __init__(self, size): 
+    self.adj = [ [0] * size for i in range(size)]
+    self.size = size 
+    
+  def add_edge(self, orig, dest): 
+    if orig > self.size or dest > self.size or orig < 0 or dest < 0: 
+      print("Invalid Edge") 
+    else: 
+      self.adj[orig-1][dest-1] = 1 
+      self.adj[dest-1][orig-1] = 1 
+        
+  def remove_edge(self, orig, dest): 
+    if orig > self.size or dest > self.size or orig < 0 or dest < 0: 
+      print("Invalid Edge") 
+    else: 
+      self.adj[orig-1][dest-1] = 0 
+      self.adj[dest-1][orig-1] = 0 
+            
+  def display(self): 
+    for row in self.adj: 
+      print() 
+      for val in row: 
+        print('{:1}'.format(val),end="") # {:1} is for distance.
 
 # loops : ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -362,7 +467,7 @@ decorated()
 def MainFunc1(func, arg):
   i = arg + 5
   return func(i)
-def MainFunc1(func, arg):
+def MainFunc2(func, arg):
   i = arg + 10
   return func(i)
 def SubFunc1(x):
