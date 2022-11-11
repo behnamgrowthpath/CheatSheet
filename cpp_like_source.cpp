@@ -387,38 +387,12 @@ vector<int> b(a.begin(), a.end());  // b is copy of a
 vector<T> c(n, x);        // c[0]..c[n-1] init to x
 T d[10]; vector<T> e(d, d+10);      // e is initialized from d
 
-// ## `deque` (Array stack queue)
-
-// `deque<T>` is like `vector<T>`, but also supports:
-
-#include <deque>          // Include deque (std namespace)
-a.push_front(x);          // Puts x at a[0], shifts elements toward back
-a.pop_front();            // Removes a[0], shifts toward front
-
 // ## `utility` (pair)
 
 #include <utility>        // Include utility (std namespace)
         pair<string, int> a("hello", 3);  // A 2-element struct
 a.first;                  // "hello"
 a.second;                 // 3
-
-// ## `map` (associative array - usually implemented as binary search trees - avg. time complexity: O(log n))
-
-#include <map>            // Include map (std namespace)
-map<string, int> a;       // Map from string to int
-a["hello"] = 3;           // Add or replace element a["hello"]
-for (auto& p:a)
-    cout << p.first << p.second;  // Prints hello, 3
-a.size();                 // 1
-
-// ## `unordered_map` (associative array - usually implemented as hash table - avg. time complexity: O(1))
-
-#include <unordered_map>  // Include map (std namespace)
-unordered_map<string, int> a; // Map from string to int
-a["hello"] = 3;           // Add or replace element a["hello"]
-for (auto& p:a)
-cout << p.first << p.second;  // Prints hello, 3
-a.size();                 // 1
 
 // ## `set` (store unique elements - usually implemented as binary search trees - avg. time complexity: O(log n))
 
@@ -461,55 +435,3 @@ duration<float, milliseconds::period>;
 // Compute duration in milliseconds
 cout << duration_cast<ms>(to - from)
 .count() << "ms";
-
-// ## `thread` (Multi-threading library)
-
-#include <thread>         // Include thread
-unsigned c =
-        hardware_concurrency(); // Hardware threads (or 0 for unknown)
-auto lambdaFn = [](){     // Lambda function used for thread body
-    cout << "Hello multithreading";
-};
-thread t(lambdaFn);       // Create and run thread with lambda
-t.join();                 // Wait for t finishes
-
-// --- shared resource example ---
-mutex mut;                         // Mutex for synchronization
-condition_variable cond;           // Shared condition variable
-const char* sharedMes              // Shared resource
-        = nullptr;
-auto pingPongFn =                  // thread body (lambda). Print someone else's message
-        [&](const char* mes){
-            while (true){
-                unique_lock<mutex> lock(mut);// locks the mutex
-                do {
-                    cond.wait(lock, [&](){     // wait for condition to be true (unlocks while waiting which allows other threads to modify)
-                        return sharedMes != mes; // statement for when to continue
-                    });
-                } while (sharedMes == mes);  // prevents spurious wakeup
-                cout << sharedMes << endl;
-                sharedMes = mes;
-                lock.unlock();               // no need to have lock on notify
-                cond.notify_all();           // notify all condition has changed
-            }
-        };
-sharedMes = "ping";
-thread t1(pingPongFn, sharedMes);  // start example with 3 concurrent threads
-thread t2(pingPongFn, "pong");
-thread t3(pingPongFn, "boing");
-
-// ## `future` (thread support library)
-
-#include <future>         // Include future
-        function<int(int)> fib =  // Create lambda function
-[&](int i){
-    if (i <= 1){
-        return 1;
-    }
-    return fib(i-1)
-           + fib(i-2);
-};
-future<int> fut =         // result of async function
-        async(launch::async, fib, 4); // start async function in other thread
-// do some other work 
-cout << fut.get();        // get result of async function. Wait if needed.
