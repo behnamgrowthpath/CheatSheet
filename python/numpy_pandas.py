@@ -69,6 +69,15 @@ print("75th percentile:", np.percentile(data, 75))
 print("standard deviation:", np.std(data))
 print("variance:", np.var(data))
 
+#matrix functions:
+x = np.array([[1,0],[0,1]])
+y = np.array([[1,2],[3,4]])
+a = np.dot(x,y)
+b = x.transpose()
+c = np.linalg.inv(x)
+d = x.trace()
+e = np.linalg.det(x)
+
 #! Pandas:
 
 import pandas as pd
